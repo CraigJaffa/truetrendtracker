@@ -1,0 +1,50 @@
+import axios, { AxiosResponse } from 'axios'
+import https from 'https'
+
+import IAssets from '../interfaces/IAssets'
+import IError from '../interfaces/IError'
+
+import Assets from '../schemas/Assets'
+
+class AssetsService {
+	async listAssets (): Promise<IAssets[] | IError> {
+		try {
+			const assets = await Assets.find().lean()
+			return assets
+		} catch (error) {
+			return { message: 'Error while trying to find users!', error: error }
+		}
+	}
+
+	async importAssets (): Promise<AxiosResponse> {
+		try {
+			const instance = axios.create({
+				httpsAgent: new https.Agent({
+					rejectUnauthorized: false
+				})
+			})
+
+			const req = await instance({
+				url: '/listings/latest?limit=400&start=2',
+				baseURL: `${process.env.CMC_BASEURL}/${process.env.CMC_VERSION}/${process.env.CMC_PATH_CRYPTOCURRENCY}`,
+				method: 'get',
+				headers: {
+					'X-CMC_PRO_API_KEY': `${process.env.CMC_APIKEY}`
+				}
+			})
+
+			await req.data.data.map(async (element) => {
+				const el = await Assets.findOne({ symbol: element.symbol }).lean()
+				if (!el) {
+					return await Assets.create({ name: element.name, symbol: element.symbol, slug: element.slug })
+				}
+			})
+
+			return req
+		} catch (error) {
+			return error
+		}
+	}
+}
+
+export default AssetsService
