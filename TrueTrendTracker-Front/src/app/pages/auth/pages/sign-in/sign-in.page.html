@@ -1,0 +1,19 @@
+<div class="container flex flex-col items-center justify-center h-full">
+    <div class="login-box">
+        <h3>TrueTrend<b>Tracker</b></h3>
+        <div class="tabs">
+            <div class="tab" [ngClass]="{'active': currentTab === 1 }" (click)="onClickChangeTab(1)">Login</div>
+            <div class="tab" [ngClass]="{'active': currentTab === 2 }" (click)="onClickChangeTab(2)">Sign Up</div>
+        </div>
+        <div class="content">
+            <div class="tab-content" *ngIf="currentTab === 1">
+                <input type="text" placeholder="username" />
+                <input type="password" placeholder="password" />
+                <span class="forgot-password"><a href="">problem with login?</a></span>
+            </div>
+        </div>
+        <button class="h-12 px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none" (click)="onClickSignIn()">
+			Sign in <i class="far fa-arrow-right"></i>
+	 </button>
+    </div>
+</div>

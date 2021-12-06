@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+html,
+body {
+    @apply h-full;
+    font-family: Ubuntu;
+}
+
+body {
+    @apply bg-gray-100;
+    @apply text-gray-800;
+    &.dark {
+        background: transparent radial-gradient(closest-side at 50% 50%, #003C40 0%, #000000 100%) 0% 0% no-repeat padding-box;
+        opacity: 1;
+    }
+}
