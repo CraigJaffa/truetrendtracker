@@ -46,6 +46,19 @@ class UsersService {
 			return { message: 'Error while trying to update user!', error: error }
 		}
 	}
+
+	async createUser (body: IUsers) : Promise<IUsers | IError> {
+		try {
+			const user = await Users.create(body)
+			if (user) {
+				return user
+			} else {
+				return { message: 'User not created!', error: '' }
+			}
+		} catch (error) {
+			return { message: 'Error while trying to create user!', error: error }
+		}
+	}
 }
 
 export default UsersService

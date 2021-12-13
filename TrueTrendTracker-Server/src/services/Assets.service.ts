@@ -12,11 +12,20 @@ class AssetsService {
 			const assets = await Assets.find().lean()
 			return assets
 		} catch (error) {
-			return { message: 'Error while trying to find users!', error: error }
+			return { message: 'Error while trying to find assets!', error: error }
 		}
 	}
 
-	async importAssets (): Promise<AxiosResponse> {
+	async getAsset (symbol: string): Promise<IAssets | IError> {
+		try {
+			const assets = await Assets.findOne({ symbol: symbol }).lean()
+			return assets
+		} catch (error) {
+			return { message: `Error while trying to find ${symbol} asset!`, error: error }
+		}
+	}
+
+	async importAssets (amount: number, index: number): Promise<AxiosResponse> {
 		try {
 			const instance = axios.create({
 				httpsAgent: new https.Agent({
@@ -25,18 +34,11 @@ class AssetsService {
 			})
 
 			const req = await instance({
-				url: '/listings/latest?limit=400&start=2',
+				url: `/listings/latest?limit=${amount}&start=${index === 1 ? index : (amount * index) - amount}`,
 				baseURL: `${process.env.CMC_BASEURL}/${process.env.CMC_VERSION}/${process.env.CMC_PATH_CRYPTOCURRENCY}`,
 				method: 'get',
 				headers: {
 					'X-CMC_PRO_API_KEY': `${process.env.CMC_APIKEY}`
-				}
-			})
-
-			await req.data.data.map(async (element) => {
-				const el = await Assets.findOne({ symbol: element.symbol }).lean()
-				if (!el) {
-					return await Assets.create({ name: element.name, symbol: element.symbol, slug: element.slug })
 				}
 			})
 

@@ -10,6 +10,7 @@ body {
     @apply text-gray-800;
     &.dark {
         background: transparent radial-gradient(closest-side at 50% 50%, #003C40 0%, #000000 100%) 0% 0% no-repeat padding-box;
+        background-attachment: cover;
         opacity: 1;
     }
 }

@@ -1,17 +1,20 @@
-<div class="grid mt-24 place-items-center">
-  <h1 class="text-3xl md:text-6xl lg:text-7xl">
-    <span
-      class="hidden text-xl text-center md:text-3xl lg:text-6xl md:inline-block"
-    >
-      🎉🎉🎉
-    </span>
-    dashboard works!
-    <span class="text-xl text-center md:text-3xl lg:text-6xl"> 🎉🎉🎉 </span>
-  </h1>
-  <a
-    [routerLink]="[path.home]"
-    class="inline-block h-12 px-6 py-3 mb-12 font-semibold text-white bg-blue-600 rounded-lg  hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none"
-  >
-    Back to home
-  </a>
+<div class="content">
+    <div class="ticker-column">
+        <div class="add-ticker" (click)="modal.toggle()">
+            Ticker +
+        </div>
+        <div class="ticker" *ngFor="let asset of assetsList; let i = index">
+            <img [src]="asset.url" appImgFallback="./assets/cryptocurrencies/generic.png" /> {{asset.symbol}}
+        </div>
+    </div>
 </div>
+
+<app-modal #modal>
+    <h1>Lorem, ipsum dolor.</h1>
+    <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum dicta non alias distinctio, aliquid aperiam ipsum provident quae nihil voluptatibus veniam fuga similique facilis consequatur reiciendis recusandae. Velit magni distinctio corporis eaque
+        ad itaque ex impedit accusamus. Debitis pariatur cum quam rerum reprehenderit quod iure, in explicabo facere vero nemo?
+    </p>
+    <button (click)="acaoPrimaria(); modal.toggle();" class="btn-primario">Ação</button>
+    <button class="btn-secundario">Ação 2</button>
+</app-modal>

@@ -12,7 +12,9 @@ const UserSchema = new Schema<IUser>({
 	},
 	username: String,
 	role: String,
-	salt: String
+	salt: String,
+	watchlist: {},
+	systems: {}
 }, {
 	timestamps: true
 })

@@ -1,29 +1,58 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getItem, removeItem, setItem, StorageItem } from '@core/utils';
 import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
+
 export class AuthService {
-  isLoggedIn$ = new BehaviorSubject<boolean>(!!getItem(StorageItem.Auth));
+	readonly apiURL: string = 'http://localhost:8181';
 
-  get isLoggedIn(): boolean {
-    return this.isLoggedIn$.getValue();
-  }
+	constructor(private http: HttpClient,
+		private router: Router,
+		private activatedRoute: ActivatedRoute,) {
+	}
 
-  signIn(): void {
-    const token = Array(4)
-      .fill(0)
-      .map(() => Math.random() * 99)
-      .join('-');
+	isLoggedIn$ = new BehaviorSubject<boolean>(!!getItem(StorageItem.Auth));
 
-    setItem(StorageItem.Auth, token);
-    this.isLoggedIn$.next(true);
-  }
+	get isLoggedIn(): boolean {
+		return this.isLoggedIn$.getValue();
+	}
 
-  signOut(): void {
-    removeItem(StorageItem.Auth);
-    this.isLoggedIn$.next(false);
-  }
+	signIn(form: string | unknown): any {
+		this.http.post(`${this.apiURL}/auth/login`, form)
+			.subscribe(
+				(result: string | any) => {
+					if (result._id) {
+						const token = Array(4)
+							.fill(0)
+							.map(() => Math.random() * 99)
+							.join('-');
+
+						setItem(StorageItem.Auth, token);
+						setItem(StorageItem.User, { user: result._id, role: result.role, username: result.usernane, name: result.name });
+						this.isLoggedIn$.next(true);
+						this.router.navigate(['/', 'dashboard']);
+					} else {
+						removeItem(StorageItem.Auth);
+						removeItem(StorageItem.User);
+						this.isLoggedIn$.next(false);
+					}
+				},
+				erro => {
+					if (erro.status == 404) {
+						console.log('Assets not found!');
+					}
+				}
+			)
+	}
+
+	signOut(): void {
+		removeItem(StorageItem.Auth);
+		removeItem(StorageItem.User);
+		this.isLoggedIn$.next(false);
+	}
 }

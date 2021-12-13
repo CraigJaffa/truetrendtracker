@@ -7,16 +7,21 @@ import { PasswordResetSucceededPage } from './pages/password-reset-succeeded/pas
 import { PasswordResetPage } from './pages/password-reset/password-reset.page';
 import { SignInPage } from './pages/sign-in/sign-in.page';
 import { SignUpPage } from './pages/sign-up/sign-up.page';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    SignInPage,
-    SignUpPage,
-    ForgotPasswordPage,
-    PasswordResetPage,
-    PasswordResetSucceededPage,
-    PasswordResetFailedPage,
-  ],
-  imports: [CommonModule, AuthRoutingModule],
+	declarations: [
+		SignInPage,
+		SignUpPage,
+		ForgotPasswordPage,
+		PasswordResetPage,
+		PasswordResetSucceededPage,
+		PasswordResetFailedPage,
+	],
+	imports: [
+		CommonModule,
+		AuthRoutingModule,
+		FormsModule,
+		ReactiveFormsModule],
 })
-export class AuthModule {}
+export class AuthModule { }

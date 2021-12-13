@@ -24,7 +24,7 @@ class AuthService {
 				return { message: 'User not found!', error: '' }
 			}
 		} catch (error) {
-			return { message: 'Error while trying to find users!', error: error }
+			return { message: 'Error while trying to login!', error: error }
 		}
 	}
 
@@ -33,7 +33,7 @@ class AuthService {
 			const user = await Users.create(body)
 			return user
 		} catch (error) {
-			return { message: 'User already exist!', error: '' }
+			return { message: 'User already exist!', error: error }
 		}
 	}
 }

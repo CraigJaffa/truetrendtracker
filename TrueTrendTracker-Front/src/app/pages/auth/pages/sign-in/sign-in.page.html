@@ -7,13 +7,20 @@
         </div>
         <div class="content">
             <div class="tab-content" *ngIf="currentTab === 1">
-                <input type="text" placeholder="username" />
-                <input type="password" placeholder="password" />
-                <span class="forgot-password"><a href="">problem with login?</a></span>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onClickSignIn()">
+                    <input type="text" formControlName="username" placeholder="username" />
+                    <input type="password" formControlName="password" placeholder="password" />
+                    <span class="forgot-password"><a href="">problem with login?</a></span>
+
+                    <button class="h-12 px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none">
+							Sign in <i class="far fa-arrow-right"></i>
+							 </button>
+                </form>
+            </div>
+            <div class="tab-content" *ngIf="currentTab === 2">
+                For now, you can't create an account!
             </div>
         </div>
-        <button class="h-12 px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none" (click)="onClickSignIn()">
-			Sign in <i class="far fa-arrow-right"></i>
-	 </button>
     </div>
 </div>

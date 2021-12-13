@@ -9,6 +9,12 @@ class UsersController {
 		return res.json(users)
 	}
 
+	public async create (req: Request, res: Response): Promise<Response> {
+		const service = new UsersService()
+		const user = await service.createUser(req.body)
+		return res.json(user)
+	}
+
 	public async select (req: Request, res: Response): Promise<Response> {
 		const service = new UsersService()
 		const user = await service.getUser(req.body._id)
