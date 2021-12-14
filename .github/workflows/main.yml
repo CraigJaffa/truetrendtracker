@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Continuous Deployment Project
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:          
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout main branch
+        uses: actions/checkout@v2.3.4
+        with:
+          repository: CraigJaffa/truetrendtracker
+          token: ${{secrets.ACCESS_TOKEN}}
+          path: truetrendtracker
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      # Runs a single command using the runners shell
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      # Deploy Application
+      - name: Deploy Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            mkdir truetrendtracker
+            cd truetrendtracker
+            sudo killall -9 node
+            git clone https://github.com/CraigJaffa/truetrendtracker.git
+            git pull
+            echo 'Deployed!'
