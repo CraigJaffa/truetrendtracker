@@ -1,4 +1,82 @@
 header {
     border-bottom: 1px solid #00BB88;
     margin-bottom: 50px;
+    color: #fff;
+    padding: 0 20px;
+    a {
+        color: #00BB88;
+        font-size: 300;
+        b {
+            font-size: 900;
+        }
+    }
+    .user-interface {
+        display: flex;
+        align-items: center;
+        .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-right: 13px;
+            align-items: flex-end;
+            .days {
+                line-height: 22px;
+                font-size: 14px;
+            }
+            .hours {
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 12px;
+            }
+        }
+        .user {
+            position: relative;
+            .user-avatar {
+                width: 42px;
+                height: 42px;
+                overflow: hidden;
+                border-radius: 42px;
+                border: 3px solid #fff;
+                background-color: #00BB88;
+                cursor: pointer;
+            }
+            .user-menu {
+                position: absolute;
+                background-color: #fff;
+                width: 200px;
+                border-radius: 10px;
+                padding: 10px;
+                right: 0;
+                top: 52px;
+                display: flex;
+                flex-direction: column;
+                &::before {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 0 10px 10px 10px;
+                    border-color: transparent transparent #fff transparent;
+                    position: absolute;
+                    top: -10px;
+                    right: 10px;
+                }
+                li {
+                    color: #00BB88;
+                    display: flex;
+                    flex: 1;
+                    justify-content: flex-end;
+                    border-bottom: 1px solid #00BB88;
+                    font-size: 12px;
+                    padding: 10px 0;
+                    cursor: pointer;
+                    font-weight: 700;
+                    &:last-child {
+                        border: none;
+                        color: #003C40;
+                    }
+                }
+            }
+        }
+    }
 }

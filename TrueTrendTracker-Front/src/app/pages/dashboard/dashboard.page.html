@@ -1,20 +1,50 @@
 <div class="content">
     <div class="ticker-column">
-        <div class="add-ticker" (click)="modal.toggle()">
+        <div class="add-ticker" (click)="modal.toggle('add-ticker')">
             Ticker +
         </div>
-        <div class="ticker" *ngFor="let asset of assetsList; let i = index">
-            <img [src]="asset.url" appImgFallback="./assets/cryptocurrencies/generic.png" /> {{asset.symbol}}
+        <div class="ticker" *ngFor="let asset of assetsList; let i = index;">
+            <div class="ticker-icon"><img [src]="asset.url" appImgFallback="./assets/cryptocurrencies/generic.png" /></div>
+            <div class="ticker-name">{{asset.symbol}}</div>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="system-column" *ngFor="let system of systemList; let i = index;">
+            <div class="system header">
+                <div class="system-name">System #{{i}}</div>
+                <div class="header-footer">
+                    <div class="name">Rank</div>
+                    <div class="name">Change</div>
+                </div>
+            </div>
+            <div class="system" *ngFor="let asset of assetsList; let i = index;">
+                <div class="system-name">12</div>
+                <div class="system-name">13</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-system-column">
+        <div class="add-system" (click)="createSystem()">
+            +
+        </div>
+        <div class="system" *ngFor="let asset of assetsList; let i = index;">
+            <div class="system-name"></div>
         </div>
     </div>
 </div>
 
-<app-modal #modal>
-    <h1>Lorem, ipsum dolor.</h1>
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum dicta non alias distinctio, aliquid aperiam ipsum provident quae nihil voluptatibus veniam fuga similique facilis consequatur reiciendis recusandae. Velit magni distinctio corporis eaque
-        ad itaque ex impedit accusamus. Debitis pariatur cum quam rerum reprehenderit quod iure, in explicabo facere vero nemo?
-    </p>
-    <button (click)="acaoPrimaria(); modal.toggle();" class="btn-primario">Ação</button>
-    <button class="btn-secundario">Ação 2</button>
+<app-modal #modal (modalInstance)="modalInstance($event)">
+    <h1>Add to Watchlist</h1>
+    <form [formGroup]="tickers" (ngSubmit)="addAssets(); modal.toggle('close-modal');">
+        <ul>
+            <li *ngFor="let ticker of tickerList;  let i = index;">
+                <label for="{{ticker.symbol}}">
+						<input type="checkbox" [value]="ticker.symbol" (change)="onCheckChange($event)" id="{{ticker.symbol}}" [checked]="ticker.status"> {{ticker.symbol}}
+					</label>
+            </li>
+        </ul>
+        <button class="btn-primario">Save</button>
+    </form>
 </app-modal>

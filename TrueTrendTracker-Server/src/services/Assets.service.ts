@@ -9,7 +9,7 @@ import Assets from '../schemas/Assets'
 class AssetsService {
 	async listAssets (): Promise<IAssets[] | IError> {
 		try {
-			const assets = await Assets.find().lean()
+			const assets = await Assets.find().skip(0).limit(20).lean()
 			return assets
 		} catch (error) {
 			return { message: 'Error while trying to find assets!', error: error }

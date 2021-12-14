@@ -5,6 +5,7 @@ import UsersController from './controllers/Users.controller'
 import AuthController from './controllers/Auth.controller'
 import AssetsController from './controllers/Assets.controller'
 import WatchlistsController from './controllers/Watchlists.controller'
+import SystemsController from './controllers/Systems.controller'
 
 const routes = Router()
 
@@ -22,6 +23,8 @@ routes.post('/auth/login', AuthController.login)
 routes.post('/auth/register', AuthController.register)
 
 // Systems Routes
+routes.post('/systems', SystemsController.create)
+routes.get('/systems/:id', SystemsController.get)
 
 // Watchlists Routes
 routes.post('/watchlist', WatchlistsController.create)

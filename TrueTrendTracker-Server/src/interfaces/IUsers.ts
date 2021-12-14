@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongoose'
+import ISystems from './ISystems'
 import IWatchlists from './IWatchlists'
 
 interface IUser {
@@ -9,7 +10,8 @@ interface IUser {
 	password: string,
 	role: string,
 	salt: string,
-	watchlist: IWatchlists
+	watchlist: IWatchlists,
+	systems: ISystems
 }
 
 export default IUser

@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {
 	trigger,
 	style,
 	animate,
 	transition
 } from '@angular/animations';
-
 @Component({
 	selector: 'app-modal',
 	templateUrl: 'modal.component.html',
@@ -49,8 +48,10 @@ import {
 })
 export class ModalComponent {
 	mostrar = false;
+	@Output() modalInstance = new EventEmitter()
 
-	toggle(): void {
+	toggle(type: string): void {
+		this.modalInstance.emit(type)
 		this.mostrar = !this.mostrar;
 	}
 }
