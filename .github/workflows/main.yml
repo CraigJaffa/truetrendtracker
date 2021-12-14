@@ -26,8 +26,8 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
-          repository: truetrendtracker
-          path: CraigJaffa/truetrendtracker
+          repository: CraigJaffa/truetrendtracker
+          path: truetrendtracker
           ssh-key: ${{ secrets.SSH_KEY }}
 
       # Runs a single command using the runners shell
