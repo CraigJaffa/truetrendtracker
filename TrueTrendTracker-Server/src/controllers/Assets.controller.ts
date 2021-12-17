@@ -24,13 +24,20 @@ class AssetsController {
 			const service = new AssetsService()
 			const assets = await service.importAssets(400, counter)
 
-			for (let index = 0; index < assets.data.data.length; index++) {
-				const element = assets.data.data[index]
-				await Assets.findOneAndUpdate({ symbol: element.symbol }, {
-					name: element.name,
-					symbol: element.symbol,
-					slug: element.slug
-				}, { new: true, upsert: true })
+			if (assets.data && assets.data.data) {
+				for (let index = 0; index < assets.data.data.length; index++) {
+					const element = assets.data.data[index]
+					await Assets.findOneAndUpdate({ symbol: element.symbol }, {
+						name: element.name,
+						symbol: element.symbol,
+						slug: element.slug
+					}, {
+						new: true,
+						upsert: true
+					})
+				}
+			} else {
+				return
 			}
 
 			if (counter < max) {
