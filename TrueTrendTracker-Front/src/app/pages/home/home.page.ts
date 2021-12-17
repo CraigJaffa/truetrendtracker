@@ -11,7 +11,7 @@ export class HomePage {
   theme = ThemeList;
 
   constructor(private themeService: ThemeService) {}
-
+	
   onClickChangeTheme(theme: ThemeList): void {
     this.themeService.setTheme(theme);
   }
