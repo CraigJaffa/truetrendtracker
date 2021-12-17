@@ -9,7 +9,7 @@ import { HomePage } from './home.page';
     CommonModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: 'auth/sign-in',
         component: HomePage,
         data: {
           title: 'Home',

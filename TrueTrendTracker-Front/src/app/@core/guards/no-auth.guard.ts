@@ -13,7 +13,7 @@ export class NoAuthGuard implements CanLoad {
     const isLoggedIn = this.authService.isLoggedIn;
 
     if (isLoggedIn) {
-      this.router.navigate([ROUTER_UTILS.config.base.home]);
+      this.router.navigate([ROUTER_UTILS.config.auth.signIn]);
       return false;
     }
 
