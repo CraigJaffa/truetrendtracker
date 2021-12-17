@@ -46,7 +46,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           script: |
             mkdir truetrendtracker
-            cd truetrendtracker
+            cd /var/www/html
             sudo killall -9 node
             git clone git@github.com:CraigJaffa/truetrendtracker.git
             git pull
