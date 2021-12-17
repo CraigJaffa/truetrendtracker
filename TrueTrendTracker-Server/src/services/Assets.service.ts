@@ -34,7 +34,7 @@ class AssetsService {
 			})
 
 			const req = await instance({
-				url: `/listings/latest?limit=${amount}&start=${index === 1 ? index : (amount * index) - amount}`,
+				url: `/listings/latest?limit=${amount}&start=${index === 1 ? index : amount * index}`,
 				baseURL: `${process.env.CMC_BASEURL}/${process.env.CMC_VERSION}/${process.env.CMC_PATH_CRYPTOCURRENCY}`,
 				method: 'get',
 				headers: {
