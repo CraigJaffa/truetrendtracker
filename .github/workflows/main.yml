@@ -24,7 +24,7 @@ jobs:
     steps:          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout main branch
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2
         with:
           repository: CraigJaffa/truetrendtracker
           token: ${{secrets.ACCESS_TOKEN}}
@@ -45,9 +45,18 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           key: ${{secrets.SSH_KEY}}
           script: |
-            mkdir truetrendtracker
             cd /var/www/html
+            rm -rf /var/www/html/
             sudo killall -9 node
             git clone git@github.com:CraigJaffa/truetrendtracker.git
             git pull
+            source ~/.profile
+            nvm use 14.17.4
+            cd truetrendtracker
+            cd TrueTrendTracker-Front
+            npm run build --prod
+            sudo mv var/www/html/truetrendtracker/TrueTrendTracker-Front/dist/* var/www/html/
+            cd ..
+            cd TrueTrendTracker-Server
+            npm run dev
             echo 'Deployed!'
