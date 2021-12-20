@@ -5,6 +5,8 @@ import { getItem, StorageItem } from '@core/utils';
 import { Observable, Subject } from 'rxjs';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 
+import {environment} from '../../../environments/environment'
+
 @Component({
 	templateUrl: './dashboard.page.html',
 	styleUrls: ['./dashboard.page.scss'],
@@ -12,7 +14,7 @@ import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 
 export class DashboardPage implements OnInit {
 	path = ROUTER_UTILS.config.base;
-	readonly apiURL: string = 'http://localhost:8181';
+	readonly apiURL: string = environment.apiUrl;
 	assetsList: Array<string | any> = [];
 
 	items: Array<string> = []

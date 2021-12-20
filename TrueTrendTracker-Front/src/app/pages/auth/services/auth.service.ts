@@ -4,12 +4,14 @@ import { getItem, removeItem, setItem, StorageItem } from '@core/utils';
 import { BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import {environment} from '../../../../environments/environment'
+
 @Injectable({
 	providedIn: 'root',
 })
 
 export class AuthService {
-	readonly apiURL: string = 'http://localhost:8181';
+	readonly apiURL: string = environment.apiUrl;
 
 	constructor(private http: HttpClient,
 		private router: Router,
