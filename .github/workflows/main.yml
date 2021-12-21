@@ -61,9 +61,11 @@ jobs:
             nvm -v
             nvm use 14.17.4
             cd TrueTrendTracker-Front
+            npm install
             npm run build --prod
             sudo mv var/www/html/truetrendtracker/TrueTrendTracker-Front/dist/* var/www/html/
             cd ..
             cd TrueTrendTracker-Server
+            npm install
             npm run dev
             echo 'Deployed!'
