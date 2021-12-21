@@ -6,7 +6,7 @@
     "scripts": {
         "clear-dir": "rimraf dist/*",
         "test": "jest --runInBand --silent",
-        "dev": "nodemon src/server.ts",
+        "dev": "nodemon src/server.ts && --exit",
         "dev-dist": "nodemon dist/server.js",
         "build": "npm run clear-dir && npm run move && sucrase ./src -d ./dist --transforms typescript,imports",
         "move": "copyfiles -u 2 **/public/index.html **/public/style.css **/public/main.js ./dist/public",
