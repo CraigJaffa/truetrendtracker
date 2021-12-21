@@ -11,6 +11,20 @@ dotenv.config({ path: path.join(__dirname, '../.env') })
 class App {
 	public express: express.Application
 
+	options: cors.CorsOptions = {
+		allowedHeaders: [
+			'Origin',
+			'X-Requested-With',
+			'Content-Type',
+			'Accept',
+			'X-Access-Token'
+		],
+		credentials: true,
+		methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+		origin: process.env.BASE_URL,
+		preflightContinue: false
+	}
+
 	constructor () {
 		this.express = express()
 
@@ -24,7 +38,7 @@ class App {
 	private middlewares (): void {
 		this.express.use(express.urlencoded({ extended: false }))
 		this.express.use(express.json())
-		this.express.use(cors())
+		this.express.use(cors(this.options))
 	}
 
 	private prepareStatic (): void {

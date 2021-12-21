@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import cors from 'cors'
 
 import DefaultController from './controllers/Default.controller'
 import UsersController from './controllers/Users.controller'
@@ -9,23 +8,6 @@ import WatchlistsController from './controllers/Watchlists.controller'
 import SystemsController from './controllers/Systems.controller'
 
 const routes = Router()
-
-const options: cors.CorsOptions = {
-	allowedHeaders: [
-		'Origin',
-		'X-Requested-With',
-		'Content-Type',
-		'Accept',
-		'X-Access-Token'
-	],
-	credentials: true,
-	methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-	origin: process.env.BASE_URL,
-	preflightContinue: false
-}
-
-// config
-routes.use(cors(options))
 
 // Default
 routes.get('/', DefaultController.default)
@@ -52,8 +34,5 @@ routes.get('/watchlist/:id/:type?', WatchlistsController.get)
 routes.get('/assets', AssetsController.list)
 routes.get('/asset/:symbol', AssetsController.get)
 routes.get('/assets/import', AssetsController.import)
-
-// preflight
-routes.options('*', cors(options))
 
 export default routes
