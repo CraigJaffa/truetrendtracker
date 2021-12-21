@@ -55,6 +55,7 @@ jobs:
             cd truetrendtracker
             git pull
             source ~/.profile
+            nvm -v
             nvm use 14.17.4
             cd TrueTrendTracker-Front
             npm run build --prod
