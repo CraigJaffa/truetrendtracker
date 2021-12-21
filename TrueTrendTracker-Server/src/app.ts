@@ -20,7 +20,7 @@ class App {
 			'X-Access-Token'
 		],
 		methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-		origin: 'http://137.184.206.214',
+		origin: '*',
 		preflightContinue: true
 	}
 
