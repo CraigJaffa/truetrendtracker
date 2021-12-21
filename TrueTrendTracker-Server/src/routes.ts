@@ -26,7 +26,6 @@ const options: cors.CorsOptions = {
 
 // config
 routes.use(cors(options))
-routes.options('*', cors(options))
 
 // Default
 routes.get('/', DefaultController.default)
@@ -53,5 +52,8 @@ routes.get('/watchlist/:id/:type?', WatchlistsController.get)
 routes.get('/assets', AssetsController.list)
 routes.get('/asset/:symbol', AssetsController.get)
 routes.get('/assets/import', AssetsController.import)
+
+// preflight
+routes.options('*', cors(options))
 
 export default routes
