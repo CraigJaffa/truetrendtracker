@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import cors from 'cors'
 
 import DefaultController from './controllers/Default.controller'
 import UsersController from './controllers/Users.controller'
@@ -8,6 +9,9 @@ import WatchlistsController from './controllers/Watchlists.controller'
 import SystemsController from './controllers/Systems.controller'
 
 const routes = Router()
+
+// config
+routes.options('*', cors())
 
 // Default
 routes.get('/', DefaultController.default)
