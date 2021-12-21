@@ -52,10 +52,10 @@ jobs:
             sudo killall -9 node
             cd html
             git clone git@github.com:CraigJaffa/truetrendtracker.git
+            cd truetrendtracker
             git pull
             source ~/.profile
             nvm use 14.17.4
-            cd truetrendtracker
             cd TrueTrendTracker-Front
             npm run build --prod
             sudo mv var/www/html/truetrendtracker/TrueTrendTracker-Front/dist/* var/www/html/
