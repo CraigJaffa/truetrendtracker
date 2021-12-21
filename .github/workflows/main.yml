@@ -48,6 +48,8 @@ jobs:
             cd /var/www/html
             rm -rf /var/www/html/
             sudo killall -9 node
+            mkdir truetrendtracker
+            cd truetrendtracker
             git clone git@github.com:CraigJaffa/truetrendtracker.git
             git pull
             source ~/.profile
