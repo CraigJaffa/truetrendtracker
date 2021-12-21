@@ -19,10 +19,9 @@ class App {
 			'Accept',
 			'X-Access-Token'
 		],
-		credentials: true,
 		methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-		origin: process.env.BASE_URL,
-		preflightContinue: false
+		origin: 'http://137.184.206.214',
+		preflightContinue: true
 	}
 
 	constructor () {
